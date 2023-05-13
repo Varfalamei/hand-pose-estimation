@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["Shakirov Renat <renatshk@gmail.com>"]
 readme = "README.md"
-packages = [{include = "hand_pose_estimation"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
