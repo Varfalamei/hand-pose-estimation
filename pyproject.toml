@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "hand-pose-estimation"
+version = "0.1.0"
+description = ""
+authors = ["Shakirov Renat <renatshk@gmail.com>"]
+readme = "README.md"
+packages = [{include = "hand_pose_estimation"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.0.1"
+opencv-python = "^4.7.0.72"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
