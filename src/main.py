@@ -1,7 +1,13 @@
+import math
+
 import cv2
 import mediapipe as mp
 
 # Задаем константы для рисования на изображении
+import numpy as np
+
+from src.utils import draw_landmarks
+
 COLOR_RED = (0, 0, 255)
 THICKNESS = 2
 FONT_SIZE = 1
@@ -39,7 +45,18 @@ def show_frame(cap, finger_tip_coords):
         # Если руки найдены, то выводим ключевые точки на экран
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
-                mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+                # TODO Убрать вместе с mediapipe
+                image_height, image_width, _ = image.shape
+                landmarks = np.array(
+                    [
+                        (
+                            min(math.floor(landmark.x * image_width), image_width - 1),
+                            min(math.floor(landmark.y * image_height), image_height - 1)
+                         )
+                        for landmark in hand_landmarks.landmark._values
+                    ]
+                )
+                draw_landmarks(frame, landmarks)
 
                 index_finger_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
                 finger_tip_coords.append(
@@ -49,8 +66,7 @@ def show_frame(cap, finger_tip_coords):
         # Рисуем линию между последними двумя точками
 
         if len(finger_tip_coords) >= 2:
-            for finger in finger_tip_coords[:-20]:
-                # cv2.с(frame,  finger_tip_coords[i + 1], COLOR_RED, THICKNESS)
+            for finger in finger_tip_coords:
                 cv2.circle(frame, finger, 2, (0, 255, 0), THICKNESS)
 
         # Отображаем текущий кадр с веб-камеры
