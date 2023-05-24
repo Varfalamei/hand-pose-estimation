@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 from typing import List, Tuple, Optional, Union
 
-# Define some constants for drawing specs
 BLUE_COLOR = (255, 0, 0)
 RED_COLOR = (0, 0, 255)
 GREEN_COLOR = (0, 255, 0)

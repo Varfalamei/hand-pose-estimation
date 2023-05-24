@@ -10,7 +10,7 @@ python = "^3.10"
 pandas = "^2.0.1"
 jupyter = "^1.0.0"
 mediapipe = "^0.10.0"
-opencv-python-headless = "^4.7.0.72"
+opencv-python = "^4.7.0.72"
 
 
 [tool.poetry.group.dev.dependencies]
